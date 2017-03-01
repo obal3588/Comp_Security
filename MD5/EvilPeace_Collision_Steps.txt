@@ -1,0 +1,62 @@
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ ./fastcoll -p prefix -o cute1 cute2
+MD5 collision generator v1.5
+by Marc Stevens (http://www.win.tue.nl/hashclash/)
+
+Using output filenames: 'cute1' and 'cute2'
+Using prefixfile: 'prefix'
+Using initial value: 6e781cc2f69536e71e34f36531f247ce
+
+Generating first block: .............
+Generating second block: S11........
+Running time: 4.20178 s
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ xxd -p cute1
+23212f7573722f62696e2f707974686f6e0a23202d2a2d20636f64696e67
+3a207574662d38202d2a2d0a626c6f62203d202222220a00000000000000
+00000000fd84baa120687f811b463abdf04edd0fc3d2596a72b286512742
+7a3591883f2cf213b500383e7b5ae73974010502b90c905addaf96f126ce
+b3aac57a5aaef5191cda32b55a9f7a103fa8312c68e0c69827edf3fb167d
+93be6c7fcf5f4b51cd4125b0c08a020aa3f697966bd1f33a616568c94473
+f7afc9d6a0f17daf1cfc753b
+
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ xxd -p cute2
+23212f7573722f62696e2f707974686f6e0a23202d2a2d20636f64696e67
+3a207574662d38202d2a2d0a626c6f62203d202222220a00000000000000
+00000000fd84baa120687f811b463abdf04edd0fc3d259ea72b286512742
+7a3591883f2cf213b500383e7b5ae73974010582b90c905addaf96f126ce
+b3aac5fa5aaef5191cda32b55a9f7a103fa8312c68e0c69827edf37b167d
+93be6c7fcf5f4b51cd4125b0c08a020aa3f697966bd1f3ba606568c94473
+f7afc9d6a0f17d2f1cfc753b
+
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -md5 cute1 cute2
+MD5(cute1)= 31623a1b7057a9dfe4e060b5a8b8287f
+MD5(cute2)= 31623a1b7057a9dfe4e060b5a8b8287f
+
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -sha256 cute1 cute2
+SHA256(cute1)= cf8aa295af6ef931896a9ebf871433903a55ec48457cb031169a2768076b053c
+SHA256(cute2)= f85590e54a0d0661b0828aa3b7d244fe509e3de212f150fd9d60d3da8442bdef
+
+
+
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ cat cute1 suffix > good.py
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ cat cute2 suffix > evil.py
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ python good.py 
+I come in peace!
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ python evil.py 
+Prepare to be destroyed!
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -md5 good.py evil.py
+MD5(good.py)= 22aeceb956038f1984e481202ca25869
+MD5(evil.py)= 22aeceb956038f1984e481202ca25869
+
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -sha256 good.py evil.py
+SHA256(good.py)= 05e360bfefb7a1e6db61b5be78ce17ecc32e2a25fe9ace735d9038245b582225
+SHA256(evil.py)= a3a6a1b8d82b37c6814200e688e2b61d8d06fa06a07045f88db0eb7debe5736d
+

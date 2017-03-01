@@ -1,0 +1,34 @@
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ make fastcoll
+make: 'fastcoll' is up to date.
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ time ./fastcoll -o file1 file2
+MD5 collision generator v1.5
+by Marc Stevens (http://www.win.tue.nl/hashclash/)
+
+Using output filenames: 'file1' and 'file2'
+Using initial value: 0123456789abcdeffedcba9876543210
+
+Generating first block: ....
+Generating second block: S10...........................................
+Running time: 3.81816 s
+
+real	0m5.379s
+user	0m3.820s
+sys	0m0.000s
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ xxd -p file1
+7da7be9761dced93daa5866c69b664e9a8e9c1133d3fabb427b282d255b0
+b356d4c9eef8ee24522eeb654e19000e9c341c15ca17dc1734590e251222
+393d41b86fe10abbeab786f737b93b8caa7b9b6b1db47f9b38583231abc3
+203fa65f68a7cfdb2224afc39f3c343f8233223c1f0ee0ae0487d6159d12
+7e764de45e9f6bfb
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ xxd -p file2
+7da7be9761dced93daa5866c69b664e9a8e9c1933d3fabb427b282d255b0
+b356d4c9eef8ee24522eeb654e19008e9c341c15ca17dc1734590e2512a2
+393d41b86fe10abbeab786f737b93b8caa7b9b6b1db47f1b38583231abc3
+203fa65f68a7cfdb2224afc39f3c343f823322bc1e0ee0ae0487d6159d12
+7e764d645e9f6bfb
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -md5 file1 file2
+MD5(file1)= 97d816e1a07fb1fafd9e1f499b3fbaa9
+MD5(file2)= 97d816e1a07fb1fafd9e1f499b3fbaa9
+rashmi@rashmi-VirtualBox:~/Documents/CompSecurity/Lab1$ openssl dgst -sha256 file1 file2
+SHA256(file1)= 9db546d9829c43ea60d75258eee07ed7575ec51e7d9996b0b2b6f99bc483ab93
+SHA256(file2)= 6fe9e9a62460a9d85953b88919a741c25e98061317c0cf028d570c8ab986fff3

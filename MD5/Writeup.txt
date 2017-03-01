@@ -1,0 +1,15 @@
+1) With reference to the construction of HMAC, explain how changing the design of the API in Section 1.2 to use token = HMACuser’s password(user=....) would avoid the length-extension vulnerability.
+
+As seen in Section 2.1, Hash-based message authentication needs protection at the back of the MAC to prevent an adversary from modifying it when in transit. Attacker can use Hash of the original message m1 and the length of m1 to calculate hash of (m1||m2) for an attacker controlled m2(appended as suffix). MD5 is based on Merkle-Damgard construction are susceptible to such attacks .
+
+HMACs, however, change the cryptographic hash algorithm to 'key'ed hash.
+  HMAC (K,m) = H((K ? outer_pad) ? H((K ? inner_pad) ? m))
+HMAC is constructed by hashing the XOR of secret key 'K' with outer padding outer_pad concatentated with the hash of the secret key K XORed with the inner padding inner_pad concatenated with the message. The inner hash by itself would be vulnerable to a length-extension attack and the attacker could successfully calculate a valid inner hash digest without access to the key. But the outer hash isn't vulnerable to a length-extension attack since the client performing HMAC authentication is only going to input the fixed length string key || inner_hash into it. The attacker only controls variable-length input to the inner hash, not the outer hash. HMAC provides integrity protection by using this secret key.
+
+
+2) Considering good.py and evil.py, the 2 files have the same hash with different content/ output. 
+Lets say one is a file containing a malicious virus and the other isn’t. When the ‘good’ file is digitally signed, since both programs have the same MD5 hash, the signature can be copied from program A(good.py) to program B(evil.py) and it will remain valid
+
+Be it Microsoft Authenticode or Linux package managers (if they use MD5) could potentially give access to a malicious program/code.
+
+Typically, Windows does not itself check the digital signature when running a locally-installed version of the program; it only checks the signature when the program bears a Mark-of-the-Web indicating that it was downloaded from the Internet or extracted from an archive downloaded from the Internet. However, executables written in .NET can be an exception to this. The .NET Framework has the ability to assign security permissions to code based on its signature, called “publisher evidence.” Doing so necessitates that the signature be verified, and verifying the signature may require an expensive network request to check the certificate for revocation. If you are not using the “publisher evidence” feature of .NET, you can modify your application’s manifest to indicate that .NET should not check the signature.
