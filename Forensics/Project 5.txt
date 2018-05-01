@@ -1,0 +1,132 @@
+1. Try booting the suspects machine and using it normally. What specific behaviors of this
+machine make this a bad idea? Attach relevant evidence.
+When attempted to boot the machine, "Theft detected, engaging security system" was displayed. Due to 'invalid_block_bitmap' error, machine failed to load in the normal mode. Attached is the snapshot of the detected errors during the boot. (Evidence_Ques 1)
+
+
+
+2. What operating system does the suspect use? Be careful and specific; e.g., say Windows
+2000 instead of just Windows.
+Puppy Linux 2.6.30.5 (vol2)
+Linux Solaris (vol3)
+
+
+3. What is the username of the account typically used by the suspect?
+nefarious
+
+
+4. Are there any indications that the suspect had an accomplice who was physically present on
+the night of the crime? Attach relevant evidence.
+A conversation between suspect and the accomplice was found in planning.log. Attached is the snapshot of this conversation: 
+(Evidence_Ques_4)
+
+
+5. Were there any suspicious-looking encrypted files on the machine? If so, please attach them
+and their decrypted contents as evidence and briefly describe how you obtained the contents.
+A suspicious file called passwords.zip was found. 
+5 password files were found. Using the fcrackzip tool, the password "soelite" was extracted. The below command was used : fcrackzip -b -c a -p AAAAAAAA -v -u -l 3-8 passwords.zip
+
+Using this password, the password files were open to find the following : 
+password1.txt : enigma
+password2.txt : love
+password3.txt : supersecret
+password4.txt : KERMIT
+password5.txt : eeMeisei700x
+
+All the above files have been attached. 
+
+
+
+6. Are there any indications that the suspect owned or was researching weapons of the kind
+involved in the murder? Attach the specific evidence and give a brief explanation.
+/img_forensics_release.raw/vol_vol7/home/nefarious/.mozilla/firefox/4vda6zgy.default/formhistory.sqlite 	/img_forensics_release.raw/vol_vol7/home/nefarious/.mozilla/firefox/4vda6zgy.default/places.sqlite
+Nerf gun search on ebay was also made (image attached : ebay_nerf_image & ebay_nerf) 
+
+
+
+
+7. Did the suspect try to delete any files before his arrest? Please attach the name(s) of the file(s)
+and any indications of their contents that you can find. (Hint: We will be impressed if you
+manage to recover the original contents of a particular incriminating file, but we do not expect
+you to do so.)
+Attempt to delete evil_plan.bmp was made the night before the murder. Some password files were also attempted to be deleted.
+Attached are the evidences for the same. (attempt_to_delete_bmp_file.png and Delete_files.png)
+
+
+8. Reconstruct the timeline of actions by the suspect that may be relevant to the investigation.
+(Make a list in this format: <date> <time>: <event description>.) Include any activities
+related to your other responses, if you can identify when they occurred. Include each time the
+suspect logged in to or booted the machine. When was the last activity before the suspect fled
+the country?
+1) Nerf gun purchase was made on ebay
+2) Conversation of suspect with accomplice took place on : Nov 25 2009- 01:54
+3) Compelete Boot information : auth.log file
+4) /var/www/index.html was last modified on 25Nov 2009 at 10:36. 
+<html><body><h1>Academic Researcher</h1>
+<p>Dr. Academic Researcher is a loser who knows nothing about computer security. <!--The duck flies at midnight! --></p>
+</body></html>
+5) Attempt to delete the evil_plan.bmp and other files were made on:  30th Nov 2009 at 10:15
+
+----------------------------------------------------------------------------------------------------------
+ - Nov. 24, 2009 - nefarious broke into Dr. Academic Researcher’s server via hydra and changed the password on the server. Also, the ip for eth0 & wlan0 were changed to 141.212.111.41. The break-in happened at Nov 24 22:37:40, ifconfig was changed at 22:39:17. The first login attempt was on Nov 21 21:50:01.
+ 
+ — Nov. 25, 2009 - shortly before 12am - Victim last seem alive
+ - Nov. 25, 2009 - nefarious zipped his passwords.zip 
+
+Archive:  passwords.zip
+ Length   Method    Size  Cmpr    Date    Time   CRC-32   Name
+--------  ------  ------- ---- ---------- ----- --------  ----
+       7  Stored        7   0% 2009-11-25 11:59 98f3e31b  password1.txt
+       5  Stored        5   0% 2009-11-25 12:00 5186e81a  password2.txt
+      12  Stored       12   0% 2009-11-25 12:00 d63bd1b6  password3.txt
+       7  Stored        7   0% 2009-11-25 12:00 ee11be68  password4.txt
+      13  Stored       13   0% 2009-11-25 12:00 62535010  password5.txt
+--------          -------  ---                            -------
+      44               44   0%                            5 files
+
+- Nov. 25, 2009 - Wed 1:54:24 - initiates a chat with accomplice on freenode.net. Accomplice promises to wait for nefarious outside the dough building by Nov. 25, 2009 3.15am.
+
+- Nov. 25 2009  - 2:59:41 - added file /home/nefarious/evil_plan.bmp. 
+- Nov. 25 2009  - 5:38:33 - modified file /home/nefarious/evil_plan.bmp.
+- Nov. 25 2009  - 10:36:30 - modified file index.html to add the comment <!--The duck flies at midnight! -->
+- Nov. 26 2009 - 6:00:00 - Victim found shot with a nerf gun; nerf blaster dart recovered as evidence.
+- Nov. 30 2011 - 10:15:48 - Nefarious deleted the evil_plan.bmp file from /home/nefarious/documents dir.
+----------------------------------------------------------------------------------------------------------
+
+
+9. Is there anything else suspicious about the machine? Attach relevant evidence as appropriate.
+The suspect seems to have made remote machine connection. Evidence is attached as 9_1 and 9_2 
+Suspect made an attempt to login to the remote machine using the below command and the system appears to be a Server.
+ssh -l root 54.147.125.121
+Password : eeMeisei700x
+
+ or 
+http://{ip}:{port}/
+http://54.147.125.121:80/
+Evidence_9 file has the evidence of suspect attempting to login to the remote machine. 
+
+
+10. Who owns this machine, according to the files on it?
+From the file /etc/passwd
+Username : academic
+The user info is captured in 10_.png
+
+11. What does its purpose appear to be? 
+    (Hint: What network service is running?)
+http://54.147.125.121:80/ is hosting the application(Apache server)
+Network services are captured in screenshot 11_.png
+
+
+12. Was the suspect granted access to the machine, or was it compromised? If the suspect was granted access, when? If it was    compromised, when and how was it compromised?
+Suspect was not granted access to the remote system. Evidence shows that suspect made multiple attempts to login to the system using different passwords. All the failed login attempts are evident in the snapshot (12_1,12_2). 
+
+The auth.log.1 file shows that there were multiple SSH login attempts from 141.212.111.41. On Nefarious's computer's auth.log, it can be seen that the command "ifconfig eth0 141.212.111.41" has been run. Also, the source code for Hydra was found on Nefarious's PC. This would indicate that Nefarious used Hydra to try to crack the ssh password of Dr. Academic Researcher's SSH server. The access was gained on Nov 25th at 10:31:35. It also shows that Nefarious changed the root password twice for the server on the next day.
+
+
+13. In either case, it appears as though the suspect has abused his access to the machine. How?
+Suspect made use of Hydra password cracking tool to login to the remote machine. Evidence_9 file has the evidence of suspect attempting to login to the remote machine. 
+
+The HTML used for the HTTP page has a comment: <!--The duck flies at midnight! -->. The HTML file, present in /var/www/ in Dr. Researcher's SSH server, was last modified on November 25th at 10:36:30, which is just after Nefarious gained access to the host. Since the murder seems to have been committed around midnight, the given comment may have been a way of secretly communicating.
+
+
+14. The comment has been removed from the HTML source. If, however, Nefarious changed more of the HTML than just the comment, it may be impossible to recover that. However, it is unlikely that Nefarious has changed more of the webpage since otherwise it would be readily apparent to anyone who viewed the webpage.
+

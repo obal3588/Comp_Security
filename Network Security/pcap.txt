@@ -1,0 +1,62 @@
+1)The IP and MAC addresses can be obtained by running this command on wireshark: 
+ip.src == 10.0.2.0/24 && ip.dst == 10.0.2.0/24 && tcp
+
+2) The network looks like an Internet Service Provider backbone
+  SOUTH AFRICAN INTERNET EXCHANGE (SAIX)
+     BGP Route Viewer AS5713
+      http://www.saix.net
+
+3a)command used:telnet
+ www.saix.net - 196.25.9.46
+
+3b)Data is not encrypted in the case of telnet. This is confirmed by comparing TLS packets, which says data is encrypted 
+
+3c) show ip route 128.138.129.98
+
+3d) ssh user@domain
+
+4a) Server Name: log.dmtry.com
+    Server Name: tps11013.doubleverify.com
+
+4b) No. If the client uses Server Name Indication (SNI), the the path and query string of the URL is encrypted, while the hostname is visible inside the SSL handshake as plain text.  Most clients use SNI because this is the only way to have different hosts with their own certificates behind the same IP address.
+
+4c)Cipher Suites (23 suites)
+Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 (0xc02b)- Advanced Encryption Standard-128
+Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f) - Advanced Encryption Standard-128
+Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA (0xc00a) - Advanced Encryption Standard-256
+Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (0xc009) - Advanced Encryption Standard-128
+Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (0xc013) - Advanced Encryption Standard - 128
+Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc014) - Advanced Encryption Standard - 256
+Cipher Suite: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA (0xc012) - Tripple Data Encryption Algorithm
+Cipher Suite: TLS_ECDHE_ECDSA_WITH_RC4_128_SHA (0xc007) - Rivest Cipher 4
+Cipher Suite: TLS_ECDHE_RSA_WITH_RC4_128_SHA (0xc011) - Rivest Cipher 4
+Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA (0x0033) - Advanced Encryption Standard-128
+Cipher Suite: TLS_DHE_DSS_WITH_AES_128_CBC_SHA (0x0032) - Advanced Encryption Standard-128
+Cipher Suite: TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA (0x0045) - Block cipher developed by Mitsubishi and NTT - 128 bits
+Cipher Suite: TLS_DHE_RSA_WITH_AES_256_CBC_SHA (0x0039) - Advanced Encryption Standard-256
+Cipher Suite: TLS_DHE_DSS_WITH_AES_256_CBC_SHA (0x0038) - Advanced Encryption Standard-256
+Cipher Suite: TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA (0x0088) - Block cipher developed by Mitsubishi and NTT - 256 bits
+Cipher Suite: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA (0x0016) - Tripple Data Encryption Algorithm
+Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f) - Advanced Encryption Standard-128
+Cipher Suite: TLS_RSA_WITH_CAMELLIA_128_CBC_SHA (0x0041) - Block cipher developed by Mitsubishi and NTT - 128 bits
+Cipher Suite: TLS_RSA_WITH_AES_256_CBC_SHA (0x0035) - Advanced Encryption Standard-256
+Cipher Suite: TLS_RSA_WITH_CAMELLIA_256_CBC_SHA (0x0084) - Block cipher developed by Mitsubishi and NTT - 256 bits
+Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a) - Tripple Data Encryption Algorithm
+Cipher Suite: TLS_RSA_WITH_RC4_128_SHA (0x0005) - Rivest Cipher 4
+Cipher Suite: TLS_RSA_WITH_RC4_128_MD5 (0x0004) - Rivest Cipher 4
+
+4d)Cipher suite using MD5 are prone to collision and length extension attacks. 
+Cipher suites using SHA is prone to collision attacks.
+
+4e) Cipher Suite: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc014)
+
+
+5a)User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:32.0) Gecko/20100101 Firefox/32.0\r\n
+
+5b)It is using Request Version: HTTP/1.1 which is insecure.
+
+5c)Full request URI: http://download.cdn.mozilla.net/pub/firefox/releases/45.0.2/update/linux-x86_64/en-US/firefox-45.0.2.complete.mar
+
+5d)User could have used https instead of http.
+
+6) Upto 10 years.
